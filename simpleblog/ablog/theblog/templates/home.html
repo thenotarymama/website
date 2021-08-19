@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<h1> <span class="badge badge-secondary" data-toggle="popover" data-trigger="focus" title="Why don't you post something? Let's keep Growing🌄🌘">Posts</span><h1>
+
+
+
+</br>
+<h3><ul class="list-group">
+{% for post in object_list %}
+    <li class="list-group-item"><a href="{% url 'article-detail' post.pk %}">{{post.title}}</a> - {{post.author.first_name}} {{ post.author.last_name}}
+    <small><a href = "{% url 'update_post' post.pk %}">Edit </a>
+      <a href = "{% url 'delete_post' post.pk %}">Delete </a>
+
+
+    </small>
+    <br/><br/>
+
+
+
+    {{post.body}}</li>
+    <br>
+
+
+{%endfor%}
+
+</ul>
+</h3>
+
+{% endblock %}

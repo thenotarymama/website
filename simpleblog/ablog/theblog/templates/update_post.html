@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Edit a Blog Post!{% endblock %}
+{% block content %}
+
+
+<h1> <span class="badge badge-secondary" data-toggle="popover" data-trigger="focus" title="If you feel like. I am not that good then fine I am going to change only for you ✈🚀"> Update Post</span><h1>
+
+
+</br>
+
+<h5>
+<div class='form-group'>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-secondary" data-toggle="popover" data-trigger="focus" title="Fine. Change me then ✈🚀" >Update</button>
+</div>
+<h5>
+
+
+{% endblock %}

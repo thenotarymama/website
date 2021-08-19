@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Delete a Blog Post!{% endblock %}
+{% block content %}
+
+
+<h1> <span class="badge badge-success">Delete Post</span><h1>
+
+
+</br>
+
+<h3> Delete: {{post.title}} </h3>
+
+<h5>
+<div class='form-group'>
+  <form method="POST">
+    {% csrf_token %}
+    <!-- {{ form.as_p }} -->
+    <br><strong> Are you Sure?</strong><br/><br>
+    <button class="btn btn-danger" data-toggle="popover" data-trigger="focus" title="Please don't do it">Delete Post</button>
+    <!-- <a tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="focus" title="Please don't do it" data-content="Please Don't do it.">Delete Post</a> -->
+</div>
+</h5>
+
+
+{% endblock %}
