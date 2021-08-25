@@ -3,30 +3,46 @@
 {% block content %}
 
 
-<h1> <span class="badge badge-secondary" data-toggle="popover" data-trigger="focus" title="Why don't you post something? Let's keep Growing🌄🌘">Posts</span><h1>
+<h1> <span class="badge badge-light" data-toggle="popover" data-trigger="focus" title="Why don't you post something? Let's keep Growing🌄🌘">Posts</span></h1>
 
 
 
 </br>
-<h3><ul class="list-group">
+<p><ul class="list-group">
 {% for post in object_list %}
-    <li class="list-group-item"><a href="{% url 'article-detail' post.pk %}">{{post.title}}</a> - {{post.author.first_name}} {{ post.author.last_name}}
-    <small><a href = "{% url 'update_post' post.pk %}">Edit </a>
-      <a href = "{% url 'delete_post' post.pk %}">Delete </a>
+    <li class="list-group-item">{{post.title}}</a>
+      - <a href="{% url 'category' post.category|slugify %}">{{ post.category }}</a>
+      - {{post.author.first_name}}
+      {{ post.author.last_name}} -
+      {{post.post_date}}
+    {% if user.is_authenticated %}
+    {% if user.id == post.author.id %}
+      <small> - <a href = "{% url 'update_post' post.pk %}">  Edit  </a> |
+        <a href = "{% url 'delete_post' post.pk %}">Delete </a>
+        {% endif %}
+      {% endif %}
+
 
 
     </small>
     <br/><br/>
 
+    {{ post.snippet }}
 
 
-    {{post.body}}</li>
+    
+  <li class="list-group-item"><a href="{% url 'article-detail' post.pk %}">Tap</a></li>
+
     <br>
+
 
 
 {%endfor%}
 
 </ul>
-</h3>
+
+
+
+
 
 {% endblock %}

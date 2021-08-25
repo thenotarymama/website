@@ -3,19 +3,31 @@
 {% block content %}
 
 
-<h1> <span class="badge badge-secondary" data-toggle="popover" data-trigger="focus" title="If you feel like. I am not that good then fine I am going to change only for you ✈🚀"> Update Post</span><h1>
+{% if user.is_authenticated %}
+  {% if user.id == post.author.id %}
+      <h1> <span class="badge badge-light" data-toggle="popover" data-trigger="focus" title="If you feel like. I am not that good then fine I am going to change only for you ✈🚀"> Update Post</span><h1>
 
 
-</br>
+      </br>
 
-<h5>
-<div class='form-group'>
-  <form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button class="btn btn-secondary" data-toggle="popover" data-trigger="focus" title="Fine. Change me then ✈🚀" >Update</button>
-</div>
-<h5>
+      <h5>
+      <div class='form-group'>
+        <form method="POST">
+          {% csrf_token %}
+          {{ form.media }}
+          {{ form.as_p }}
+          <button class="btn btn-secondary" data-toggle="popover" data-trigger="focus" title="Fine. Change me then ✈🚀" >Update</button>
+      </div>
+    </h5>
+    {% else %}
+      You are not allowed here! (Why don't you pay the admin for the access?? 🤑🤓🤭)
+    {% endif %}
 
+
+{% else %}
+
+You are not allowed here! (Why don't you pay the admin for the access?? 🤑🤓🤭)
+
+{% endif %}
 
 {% endblock %}

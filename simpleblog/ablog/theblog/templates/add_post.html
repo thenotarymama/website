@@ -3,20 +3,36 @@
 {% block content %}
 
 
-<h1> <span class="badge badge-secondary">Add Your Idea</span><h1>
+{% if user.is_authenticated %}
+  <h1> <span class="badge badge-light">Add Your Idea..</span><h1>
 
 
-</br>
+  </br>
 
-<h5>
-<div class='form-group'>
-  <form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button class="btn btn-secondary" data-toggle="popover" data-container="body" data-placement="top" data-content="We are Excited 🚙">Post</button>
+  <h5>
+  <div class='form-group'>
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.media }}
+      {{ form.as_p }}
+      <button class="btn btn-secondary" data-toggle="popover" data-container="body" data-placement="top" data-content="We are Excited 🚙">Post</button>
 
-</div>
-<h5>
+  </div>
+  <h5>
+
+    <script>
+    var name = "{{ user.id }}";
+    document.getElementById("elder").value
+            = name;
+
+
+    </script>
+
+{% else %}
+
+You are not allowed here! (Why don't you pay the admin for the access?? 🤑🤓🤭)
+
+{% endif %}
 
 
 {% endblock %}

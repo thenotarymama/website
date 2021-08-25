@@ -5,20 +5,53 @@
 {% block content%}
 
 
+
+
 <h1> {{ post.title }} </h1>
-<small> By: {{ post.author.first_name }}
-  {{ post.author.last_name}}- <a href="{% url 'update_post' post.pk%}">Edit</a>
-  <a href="{% url 'delete_post' post.pk%}">Delete</a>
+<small> By:
+  {{ post.author.first_name }}
+  {{ post.author.last_name}}-
+  {{post.post_date}}
+
+  {% if user.is_authenticated %}
+  {% if user.id == post.author.id %}
+      - <a href="{% url 'update_post' post.pk%}"> Edit </a> |
+      <a href="{% url 'delete_post' post.pk%}">Delete</a>
+      {% endif %}
+  {% endif %}
 
 </small><br/>
 
 <hr>
 <br/>
-{{ post.body }}
+{{ post.body|safe }}
 <br/><br/>
 
 <!-- <button type="button" class="btn btn-secondary">Get me back</button> -->
 <a href = "{% url 'home' %}" class ="btn btn-secondary" data-toggle="popover" data-trigger="focus" title="I don't feel good here. Please take me home 🚗"> Take me Home </a>
 
+
+<br><br><br>
+<hr>
+<br>
+<form action="{% url 'like_post' post.pk %}" method="POST">
+  {% csrf_token %}
+
+  {% if user.is_authenticated %}
+		{% if liked %}
+			<button type="submit", name="post_id", value="{{ post.id }}", class="btn btn-danger btn-sm">Unlike</button>
+		{% else %}
+			<button type="submit", name="post_id", value="{{ post.id }}", class="btn btn-primary btn-sm">Like</button>
+
+		{% endif %}
+	{% else %}
+		<small><a href="{% url 'login' %}">Login</a> to like</small>
+	{% endif %}
+
+		- {{ total_likes }} Likes
+
+    <br><br><br><br><br>
+
+</form>
 
 {% endblock %}

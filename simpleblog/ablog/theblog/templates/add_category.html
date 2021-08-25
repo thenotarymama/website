@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Create A New Blog Category!{% endblock %}
+{% block content %}
+
+
+{% if user.is_authenticated %}
+  <h1> <span class="badge badge-light">Add Category</span><h1>
+
+
+  </br>
+
+  <h5>
+  <div class='form-group'>
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="btn btn-secondary" data-toggle="popover" data-container="body" data-placement="top" data-content="We are Excited 🚙">Add Category</button>
+
+  </div>
+  <h5>
+
+{% else %}
+
+You are not allowed here! (Why don't you pay the admin for the access?? 🤑🤓🤭)
+
+{% endif %}
+
+
+{% endblock %}
